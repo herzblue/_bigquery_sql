@@ -59,7 +59,6 @@ WITH w AS (
 SELECT warehouse, state FROM w, UNNEST(w.col)
 
 
-
 -- -- #3 DELETE statement
 -- #3-1 WHERE keyword
 -- #3-2 DELETE examples
@@ -67,10 +66,38 @@ SELECT warehouse, state FROM w, UNNEST(w.col)
 -- -- #4 TRUNCATE TABLE statement
 -- #4-1 TRUNCATE TABLE examples
 
+
+
 -- -- #5 UPDATE statement
+-- UPDATE테이블 내의 기존 행을 업데이트
+UPDATE target_name [[AS] alias]
+SET set_clause
+[FROM from_clause]
+WHERE condition
+
+set_clause ::= update_item[, ...]
+
+update_item ::= column_name = expression
+-- target_name: 업데이트할 테이블의 이름입니다.
+-- update_item: 업데이트할 열의 이름과 업데이트된 값을 평가할 표현식입니다. 표현식에는 DEFAULT해당 열의 기본값으로 대체되는 키워드가 포함될 수 있습니다.
+-- 열이 STRUCT유형 인 경우 점 표기법을 사용하여 column_name필드를 참조할 수 있습니다 STRUCT. 예를 들어, struct1.field1.
+
+
+
 -- #5-1 WHERE keyword
 -- #5-2 FROM keyword
 -- #5-3 UPDATE examples
+
+-- examples1: 문자열이 포함된 모든 제품에 대해 필드 Inventory값을 10씩 줄여 명명된 테이블을 업데이트
+UPDATE dataset.Inventory
+SET quantity = quantity - 10,
+    supply_constrained = DEFAULT
+WHERE product like '%washer%'
+
+
+
+
+
 
 -- -- #6 MERGE statement
 -- #6-1 Omitting column names
